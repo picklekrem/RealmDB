@@ -48,7 +48,7 @@ class CreateEventViewController: UIViewController {
     }
     
     @objc func eventButtonClicked() {
-        print("event button clickeddddddd")
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -121,6 +121,7 @@ class CreateEventViewController: UIViewController {
             newEvent.eventName = eventNameLabel.text
             newEvent.startTime = startDateField.text
             newEvent.endTime = endDateField.text
+            
             realm.beginWrite()
             realm.add(newEvent)
             try! realm.commitWrite()

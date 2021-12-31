@@ -35,10 +35,17 @@ extension UIView {
         self.layer.maskedCorners = corners
     }
     
+    func cardView() {
+        self.backgroundColor = .systemBackground
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.masksToBounds = false
+        self.layer.cornerRadius = 4.0
+    }
+    
     func roundedCorners() {
         self.clipsToBounds = true
         self.layer.cornerRadius = 20
-        
     }
 }
-

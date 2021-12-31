@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		74A466304D4319A79D3F79A4 /* Pods_RealmDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172ADB0FC759686CA4B89645 /* Pods_RealmDB.framework */; };
 		EADC09AD277DD20E009D10ED /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADC09AC277DD20E009D10ED /* Extensions.swift */; };
-		EADC09AF277DD699009D10ED /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADC09AE277DD699009D10ED /* XibView.swift */; };
 		EAF4B69C277C830800493CC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF4B69B277C830800493CC8 /* AppDelegate.swift */; };
 		EAF4B69E277C830800493CC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF4B69D277C830800493CC8 /* SceneDelegate.swift */; };
 		EAF4B6A0277C830800493CC8 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF4B69F277C830800493CC8 /* EventViewController.swift */; };
@@ -28,7 +27,6 @@
 		269096816DE624CDA323E9CB /* Pods-RealmDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealmDB.debug.xcconfig"; path = "Target Support Files/Pods-RealmDB/Pods-RealmDB.debug.xcconfig"; sourceTree = "<group>"; };
 		A2B8A8AEF39C9C648499C78D /* Pods-RealmDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealmDB.release.xcconfig"; path = "Target Support Files/Pods-RealmDB/Pods-RealmDB.release.xcconfig"; sourceTree = "<group>"; };
 		EADC09AC277DD20E009D10ED /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		EADC09AE277DD699009D10ED /* XibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibView.swift; sourceTree = "<group>"; };
 		EAF4B698277C830800493CC8 /* RealmDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealmDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAF4B69B277C830800493CC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAF4B69D277C830800493CC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +92,7 @@
 		EAF4B69A277C830800493CC8 /* RealmDB */ = {
 			isa = PBXGroup;
 			children = (
+				EADC09AC277DD20E009D10ED /* Extensions.swift */,
 				EAF4B6BC277C92D700493CC8 /* Model */,
 				EAF4B6B5277C8BAB00493CC8 /* ViewModels */,
 				EAF4B6B4277C8B9700493CC8 /* Controllers */,
@@ -103,8 +102,6 @@
 				EAF4B6A6277C830C00493CC8 /* LaunchScreen.storyboard */,
 				EAF4B6A4277C830C00493CC8 /* Assets.xcassets */,
 				EAF4B6A9277C830C00493CC8 /* Info.plist */,
-				EADC09AC277DD20E009D10ED /* Extensions.swift */,
-				EADC09AE277DD699009D10ED /* XibView.swift */,
 			);
 			path = RealmDB;
 			sourceTree = "<group>";
@@ -275,7 +272,6 @@
 				EAF4B6C0277C936B00493CC8 /* CreateEventViewController.swift in Sources */,
 				EAF4B6B8277C8D9F00493CC8 /* EventViewModel.swift in Sources */,
 				EAF4B6BE277C92E700493CC8 /* EventModel.swift in Sources */,
-				EADC09AF277DD699009D10ED /* XibView.swift in Sources */,
 				EAF4B69E277C830800493CC8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
