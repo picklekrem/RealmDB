@@ -24,6 +24,7 @@ class CreateEventViewController: UIViewController {
     var minimumDate = Date()
     @IBOutlet weak var eventButton: UIView!
     @IBOutlet weak var createEventButton: UIView!
+    @IBOutlet weak var saveButtonOutlet: UIButton!
     
     let realm = try! Realm()
     var newEvent = Events()
@@ -32,7 +33,7 @@ class CreateEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemPurple
         createDatePicker()
         let eventType : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.eventsClicked))
         self.eventTypeView.isUserInteractionEnabled = true
@@ -42,9 +43,19 @@ class CreateEventViewController: UIViewController {
         self.eventButton.isUserInteractionEnabled = true
         self.eventButton.addGestureRecognizer(eventButtonGesture)
         
+        pickerView.backgroundColor = .secondarySystemBackground
+        
         backView.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 50)
         eventButton.roundedCorners()
         createEventButton.roundedCorners()
+        
+        eventNameLabel.addColoredBottomBorder(color: .systemGray)
+        companyNameTextField.addColoredBottomBorder(color: .systemGray)
+        startDateField.addColoredBottomBorder(color: .systemGray)
+        endDateField.addColoredBottomBorder(color: .systemGray)
+        
+        saveButtonOutlet.titleLabel?.adjustsFontSizeToFitWidth = true
+        saveButtonOutlet.titleLabel?.minimumScaleFactor = 0.5
     }
     
     @objc func eventButtonClicked() {
@@ -77,11 +88,11 @@ class CreateEventViewController: UIViewController {
         formatter.dateFormat = "dd.MM.yyyy HH:mm"
         
         if startDateField.isFirstResponder {
-            startDateField.text = formatter.string(from: datePicker.date)
             minimumDate = datePicker.date
+            startDateField.text = formatter.string(from: datePicker.date)
         }
+        
         if endDateField.isFirstResponder {
-            
             endDateField.text = formatter.string(from: datePicker.date)
         }
         self.view.endEditing(true)
@@ -126,7 +137,7 @@ class CreateEventViewController: UIViewController {
             realm.add(newEvent)
             try! realm.commitWrite()
             showToast(message: "Event saved successfully ", font: .systemFont(ofSize: 20.0))
-            
+            navigationController?.popViewController(animated: true)
         }
     }
     

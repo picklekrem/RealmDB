@@ -13,6 +13,8 @@ class EventViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var eventTableView: UITableView!
+    @IBOutlet weak var eventButton: UIView!
+    @IBOutlet weak var createEventButton: UIView!
     
     let realm = try! Realm()
     
@@ -23,8 +25,12 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         eventTableView.register(EventTableViewCell.nib(), forCellReuseIdentifier: EventTableViewCell.identifier)
-        eventTableView.separatorStyle = .none
-       
+        setupUI()
+        
+        let createEventButtonGesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(createEventButtonClicked))
+        self.createEventButton.isUserInteractionEnabled = true
+        self.createEventButton.addGestureRecognizer(createEventButtonGesture)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.async {
@@ -32,6 +38,21 @@ class EventViewController: UIViewController {
             self.searchData = self.events
             self.eventTableView.reloadData()
         }
+    }
+    
+    func setupUI() {
+        view.backgroundColor = .systemPurple
+        eventTableView.separatorStyle = .none
+        
+        backView.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 50)
+        eventButton.roundedCorners()
+        createEventButton.roundedCorners()
+        searchBar.addColoredBottomBorder(color: .systemGray)
+        searchBar.layer.cornerRadius = 50
+    }
+    
+    @objc func createEventButtonClicked() {
+        performSegue(withIdentifier: "segue", sender: nil)
     }
     
 }
@@ -51,13 +72,24 @@ extension EventViewController : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        performSegue(withIdentifier: "segue", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("Deleted")
-            #warning("Silme işlemini yap.")
+            
+            
+            realm.beginWrite()
+            
+            let test = realm.objects(Events.self)
+            test.forEach { x in
+                if x.companyName?.uppercased() == searchData[indexPath.row].companyName?.uppercased() {
+                    realm.delete(x)
+                }
+            }
+            self.eventTableView.reloadData()
+            try! realm.commitWrite()
+            
             self.searchData.remove(at: indexPath.row)
             self.eventTableView.deleteRows(at: [indexPath], with: .automatic)
         }
