@@ -81,8 +81,8 @@ extension EventViewController : UITableViewDelegate, UITableViewDataSource {
             
             realm.beginWrite()
             
-            let test = realm.objects(Events.self)
-            test.forEach { x in
+            let realmdb = realm.objects(Events.self)
+            realmdb.forEach { x in
                 if x.companyName?.uppercased() == searchData[indexPath.row].companyName?.uppercased() {
                     realm.delete(x)
                 }
