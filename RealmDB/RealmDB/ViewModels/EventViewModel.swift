@@ -10,7 +10,6 @@ import RealmSwift
 class EventViewModel {
     
     let realm = try! Realm()
-    var eventObject = Events()
     
     func getEvents() -> [Events] {
         let result = realm.objects(Events.self)

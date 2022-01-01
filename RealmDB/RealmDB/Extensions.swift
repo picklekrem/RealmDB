@@ -10,7 +10,6 @@ import UIKit
 extension UIViewController  {
     
     func showToast(message : String, font: UIFont) {
-        
         let toastLabel = UILabel(frame: CGRect(x: 0 , y: self.view.frame.size.height-100, width: view.frame.size.width, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
@@ -28,7 +27,9 @@ extension UIViewController  {
         })
     }
 }
+
 extension UIView {
+    
     func roundCorners(corners: CACornerMask, radius: CGFloat) {
         self.clipsToBounds = true
         self.layer.cornerRadius = radius
@@ -51,6 +52,7 @@ extension UIView {
 }
 
 extension UITextField {
+    
     func addColoredBottomBorder(color:UIColor) {
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: 1)
@@ -61,6 +63,7 @@ extension UITextField {
 }
 
 extension UISearchBar {
+    
     func addColoredBottomBorder(color:UIColor) {
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: 1)
@@ -69,7 +72,9 @@ extension UISearchBar {
         layer.addSublayer(bottomLine)
     }
 }
+
 extension UILabel {
+    
     func addColoredBottomBorder(color:UIColor) {
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: 1)
@@ -78,4 +83,3 @@ extension UILabel {
         layer.addSublayer(bottomLine)
     }
 }
-

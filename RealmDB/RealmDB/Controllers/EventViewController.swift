@@ -54,7 +54,6 @@ class EventViewController: UIViewController {
     @objc func createEventButtonClicked() {
         performSegue(withIdentifier: "segue", sender: nil)
     }
-    
 }
 
 extension EventViewController : UITableViewDelegate, UITableViewDataSource {
@@ -71,14 +70,14 @@ extension EventViewController : UITableViewDelegate, UITableViewDataSource {
         cell.configure(data: data)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("Deleted")
-            
-            
             realm.beginWrite()
             
             let realmdb = realm.objects(Events.self)
@@ -89,22 +88,18 @@ extension EventViewController : UITableViewDelegate, UITableViewDataSource {
             }
             self.eventTableView.reloadData()
             try! realm.commitWrite()
-            
             self.searchData.remove(at: indexPath.row)
             self.eventTableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
-  
 }
 
 extension EventViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchData = []
-        
         if searchText == "" {
             searchData = events
         }
-                
         for word in events {
             if word.companyName!.uppercased().contains(searchText.uppercased()) {
                 searchData.append(word)

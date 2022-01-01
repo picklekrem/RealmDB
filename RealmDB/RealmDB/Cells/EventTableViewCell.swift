@@ -32,8 +32,6 @@ class EventTableViewCell: UITableViewCell {
         startTimeLabel.text = startTime
         let endTime = dateSet(timeText: data.endTime)
         endTimeLabel.text = endTime
-        colorView.backgroundColor = colors.randomElement()
-        
     }
     
     func dateSet(timeText : String?) -> String {
@@ -51,6 +49,8 @@ class EventTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code 
         backView.cardView() // istenilmiyor ise, tableview seperator aç
+        colorView.layer.cornerRadius = 5
+        colorView.backgroundColor = colors.randomElement()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

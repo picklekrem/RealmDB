@@ -17,6 +17,7 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var eventTypeView: UIView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var companyNameTextField: UITextField!
+    @IBOutlet weak var maskView: UIView!
     
     @IBOutlet weak var startDateField: UITextField!
     @IBOutlet weak var endDateField: UITextField!
@@ -33,8 +34,10 @@ class CreateEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPurple
+        
+        setupUI()
         createDatePicker()
+        
         let eventType : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.eventsClicked))
         self.eventTypeView.isUserInteractionEnabled = true
         self.eventTypeView.addGestureRecognizer(eventType)
@@ -43,6 +46,15 @@ class CreateEventViewController: UIViewController {
         self.eventButton.isUserInteractionEnabled = true
         self.eventButton.addGestureRecognizer(eventButtonGesture)
         
+        
+        let maskTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cancelPickerContainer))
+        self.maskView.isUserInteractionEnabled = true
+        self.maskView.addGestureRecognizer(maskTap)
+        
+    }
+    
+    func setupUI() {
+        view.backgroundColor = .systemPurple
         pickerView.backgroundColor = .secondarySystemBackground
         
         backView.roundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 50)
@@ -61,7 +73,6 @@ class CreateEventViewController: UIViewController {
     @objc func eventButtonClicked() {
         navigationController?.popViewController(animated: true)
     }
-    
     
     func createDatePicker() {
         startDateField.inputView = datePicker
@@ -98,28 +109,29 @@ class CreateEventViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    
     @objc func eventsClicked() {
         if self.pickerContainer.isHidden {
-//            self.maskView.isHidden = false
+            self.maskView.isHidden = false
             self.pickerContainer.isHidden = false
             UIView.animate(withDuration: 0.3, delay: 0.0, options: [], animations: {
                 self.pickerContainer.alpha = 1.0
-//                self.maskView.alpha = 1.0
+                self.maskView.alpha = 1.0
                 self.pickerView.reloadAllComponents()
             }, completion: { (finished: Bool) in
             })
         }
     }
+    
     @objc func cancelPickerContainer() {
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [], animations: {
             self.pickerContainer.alpha = 0.0
-//            self.maskView.alpha = 0.0
+            self.maskView.alpha = 0.0
         }, completion: { (finished: Bool) in
             self.pickerContainer.isHidden = true
-//            self.maskView.isHidden = true
+            self.maskView.isHidden = true
         })
     }
+    
     @IBAction func pickerDoneClicked(_ sender: Any) {
         cancelPickerContainer()
     }
@@ -140,7 +152,6 @@ class CreateEventViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
-    
 }
 
 extension CreateEventViewController : UIPickerViewDelegate, UIPickerViewDataSource {
@@ -155,8 +166,8 @@ extension CreateEventViewController : UIPickerViewDelegate, UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return eventType[row]
     }
+    
 //    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-//
 //        let eventText = UILabel(frame: CGRect(x: 0, y: 0, width: pickerView.frame.size.width, height: 30))
 //        eventText.font = UIFont(name: "OpenSans", size: 16)
 //        eventText.textAlignment = .center
@@ -164,6 +175,7 @@ extension CreateEventViewController : UIPickerViewDelegate, UIPickerViewDataSour
 //        eventText.text = eventType[row]
 //        return eventText
 //    }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         eventNameLabel.text = eventType[row]
     }
